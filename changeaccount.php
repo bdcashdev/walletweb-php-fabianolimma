@@ -7,9 +7,9 @@
 	$username = $_SESSION['username'];
 	//query
 	$password= sha1($_POST['currentpass']);
-	$sql = mysql_query("SELECT * FROM usersystem where username = '".$username."' AND password = '".$password."' LIMIT 1");
+	$sql = mysqli_query($conn,"SELECT * FROM usersystem where username = '".$username."' AND password = '".$password."' LIMIT 1");
 	
-	$rows = mysql_num_rows($sql);
+	$rows = mysqli_num_rows($sql);
 	
 		if ($rows<=0)
 			{
@@ -21,7 +21,7 @@
 			}
  
 			{
-				mysql_query("update usersystem SET password='$newpass' where username='$username'") or die (mysql_error());
+				mysqli_query($conn,"update usersystem SET password='$newpass' where username='$username'") or die (mysqli_error());
 				header("Location: accountupdated.php");
 							
 			}
